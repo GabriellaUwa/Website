@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html"><div style="text-align: center;">Home</div></a>
+        <a href="browserInfo.html"><div style="text-align: center;">Browser info</div></a>
+        <a href="ipAddressing.html" style="text-align: center;">IP Addressing</a>
+        <a href="urlAnalyzer.html" style="text-align: center;">URL ANALYZER</a>
+        <a href="contact.html" style="text-align: center;">Contact</a>
+        <a href="https://learn.zybooks.com/" style="text-align: center;">Zybooks</a>
+    </div>
+
+    <span
+            style="font-size:45px;cursor:pointer;font-weight:bold; opacity: 0.7;color: white;" onclick="openNav()">&#9776;
+    </span>
+    <script src="scripts.js"></script>
+
+    <h3 style="text-align: center;">
+        Assignment 1
+    </h3>
+    <h3 id="p" style="font-size: Large"></h3>
+
+    <script>
+        var x = "Browser CodeName: " + navigator.appCodeName + "<br>" + "Platform: " + navigator.platform + "<br>" + "Version info: " + navigator.appVersion  + "<br><br>" + "Available Height: " + screen.availHeight
+            + "<br>" + "Available Width: " + screen.availWidth + "<br>" + "Color Depth: " + screen.colorDepth + "<br><br>" + "Window Width: " + window.innerWidth + "<br>" + "Window Height: " + window.innerHeight ;
+        document.getElementById("p").innerHTML = x;
+    </script>
+
+</body>
+</html>

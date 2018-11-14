@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"></head>
+</head>
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="index.html"><div style="text-align: center;">Home</div></a>
+    <a href="browserInfo.html"><div style="text-align: center;">Browser Info</div></a>
+    <a href="ipAddressing.html" style="text-align: center;">IP Addressing</a>
+    <a href="urlAnalyzer.html" style="text-align: center;">URL ANALYZER</a>
+    <a href="contact.html" style="text-align: center;">Contact</a>
+    <a href="https://learn.zybooks.com/" style="text-align: center;">Zybooks</a>
+</div>
+<span
+        style="font-size:45px;cursor:pointer;font-weight:bold; opacity: 0.7;color: white;" onclick="openNav()">&#9776;
+    </span>
+<script src="scripts.js"></script>
+<script src="scripts2.js"></script>
+
+
+<div style="text-align: center;">
+    <h2 style="color: black;">
+        Ip Addressing below
+    </h2>
+</div>
+<div>
+
+    <form id="n">
+        <strong>Enter the number of ip's you want:</strong>
+        <input name="ip" type="number" min="1">
+        <br><br>
+    </form>
+
+    <form id="ipType">
+        <input type="radio" name="iptype" value="IPV4">IPV4<br>
+        <input type="radio" name="iptype" value="IPV6">IPV6<br><br><br>
+    </form>
+</div>
+
+<div>
+    <form id="ip4Type">
+        <strong>This is only applicable if you chose IPV4</strong><br>
+        <input type="radio" name="ip4type" value="Classful"> Classful<br>
+        <input type="radio" name="ip4type" value="Classless"> Classless<br><br><br>
+    </form>
+</div>
+<div>
+    <strong>This is only applicable if you chose Classful</strong>
+    <select id="Classful">
+        <option value="Class A">Class A</option>
+        <option value="Class B">Class B</option>
+        <option value="Class C">Class C</option>
+        <option value="Class D">Class D</option>
+        <option value="Class E">Class E</option>
+    </select>
+</div>
+
+<div>
+    <strong>Here are your IP's:</strong>
+    <pre id="output"></pre>
+</div>
+<button type="button" onclick=start()>Get IP</button>
+
+</body>
+</html>

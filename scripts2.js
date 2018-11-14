@@ -1,36 +1,36 @@
 var a = [];
 var ipVal = [];
 function classA() {
-    for (let ip of range('0.0.0.0', '127.0.0.0')) {
-            a.push(ip);
+    for (let ip of range('0.0.0.0', '0.0.0.20')) {
+        a.push(ip);
     }
     return a;
 }
 
 function classB() {
-    for (let ip of range('128.0.0.0', '191.255.0.0')) {
-            a.push(ip);
+    for (let ip of range('128.0.0.0', '128.0.0.20')) {
+        a.push(ip);
     }
     return a;
 }
 
 function classC() {
-    for (let ip of range('192.0.0.0', '223.255.255.0')) {
-            a.push(ip);
+    for (let ip of range('192.0.0.0', '192.0.0.20')) {
+        a.push(ip);
     }
     return a;
 }
 
 function classD() {
-    for (let ip of range('224.0.0.0', '239.255.255.255')) {
-            a.push(ip);
+    for (let ip of range('224.0.0.0', '224.0.0.20')) {
+        a.push(ip);
     }
     return a;
 }
 
 function classE() {
-    for (let ip of range('240.0.0.0', '255.255.255.255')) {
-            a.push(ip);
+    for (let ip of range('240.0.0.0', '240.0.0.20')) {
+        a.push(ip);
     }
     return a;
 }
@@ -87,17 +87,16 @@ function start(){
                 //classless
             }
         }
-
 }
 
 function store(ips){
-
+    var i;
     for(i = 0; i < ips.length; i++){
         if(localStorage.getItem(ips[i]))
             console.log("nothing");
         else
             localStorage.setItem(ips[i], ips[i]);
-            document.getElementById("output").innerHTML(ips[i]);
+            document.getElementById("output").innerText = ips[i];
 
     }
 }
@@ -143,7 +142,7 @@ function *range(ip1, ip2) {
     assertIpv4(ip1, 'argument "ip1" must be a valid IPv4 address');
     assertIpv4(ip2, 'argument "ip2" must be a valid IPv4 address');
 
-    let hex  = ip2hex(ip1);
+    let hex = ip2hex(ip1);
     let hex2 = ip2hex(ip2);
 
     if (hex > hex2) {
@@ -156,3 +155,4 @@ function *range(ip1, ip2) {
         yield `${(i >> 24) & 0xff}.${(i >> 16) & 0xff}.${(i >> 8) & 0xff}.${i & 0xff}`;
     }
 }
+

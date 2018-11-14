@@ -28,24 +28,19 @@
 </div>
 <div>
 
-    <form id="n">
         <strong>Enter the number of ip's you want:</strong>
-        <input name="ip" type="number" min="1">
+        <input name="ip" type="number" min="1" id="n">
         <br><br>
-    </form>
 
-    <form id="ipType">
-        <input type="radio" name="iptype" value="IPV4">IPV4<br>
-        <input type="radio" name="iptype" value="IPV6">IPV6<br><br><br>
-    </form>
+    <input type="radio" name="iptype" value="IPV4" id="ip4">IPV4<br>
+    <input type="radio" name="iptype" value="IPV6" id="ip6">IPV6<br><br><br>
+
 </div>
 
 <div>
-    <form id="ip4Type">
-        <strong>This is only applicable if you chose IPV4</strong><br>
-        <input type="radio" name="ip4type" value="Classful"> Classful<br>
-        <input type="radio" name="ip4type" value="Classless"> Classless<br><br><br>
-    </form>
+    <strong>This is only applicable if you chose IPV4</strong><br>
+    <input type="radio" name="ip4type" value="Classful" id="ip4type"> Classful<br>
+    <input type="radio" name="ip4type2" value="Classless" id="ip4type2"> Classless<br><br><br>
 </div>
 <div>
     <strong>This is only applicable if you chose Classful</strong>

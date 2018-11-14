@@ -1,89 +1,93 @@
 var a = [];
-function classA(n) {
+var ipVal = [];
+function classA() {
     for (let ip of range('0.0.0.0', '127.0.0.0')) {
-        for(i =0; i < n; i++){
-            a.append(ip);
-        }
+            a.push(ip);
     }
     return a;
 }
 
-function classB(n) {
+function classB() {
     for (let ip of range('128.0.0.0', '191.255.0.0')) {
-        for(i =0; i < n; i++){
-            a.append(ip);
-        }
+            a.push(ip);
     }
     return a;
 }
 
-function classC(n) {
+function classC() {
     for (let ip of range('192.0.0.0', '223.255.255.0')) {
-        for(i =0; i < n; i++){
-            a.append(ip);
-        }
+            a.push(ip);
     }
     return a;
 }
 
-function classD(n) {
+function classD() {
     for (let ip of range('224.0.0.0', '239.255.255.255')) {
-        for(i =0; i < n; i++){
-            a.append(ip);
-        }
+            a.push(ip);
     }
     return a;
 }
 
-function classE(n) {
+function classE() {
     for (let ip of range('240.0.0.0', '255.255.255.255')) {
-        for(i =0; i < n; i++){
-            a.append(ip);
-        }
+            a.push(ip);
     }
     return a;
 }
 
 function start(){
 
-        var rdB1 = document.getElementById("ipType").value;
-        var rdB1 = document.getElementById("ip4Type").value;
-        var n = document.getElementById("n").value;
-        var ip = "";
+        var ipType = document.getElementById("ip4").value;
+        if (ipType === undefined)
+            ipType = document.getElementById("ip6").value;
 
-        if(rdB1 === "IPV4"){
-            if(rdB2 === "Classful"){
+        var cls = document.getElementById("ip4type").value;
+        if (cls === undefined)
+            cls = document.getElementById("ip6type").value;
+
+        var n = document.getElementById("n").value;
+
+        var i;
+        if(ipType === "IPV4"){
+            if(cls === "Classful"){
                 var dropDn = document.getElementById("Classful").value;
                 if(dropDn === "Class A"){
-                    classA(n);
-                    ip = a[Math.floor(Math.random() * a.length)];
+                    classA();
+                    for(i = 0; i<n; i++)
+                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                    store(ipVal);
                 }
                 else if(dropDn === "Class B"){
-                    classB(n);
-                    ip = a[Math.floor(Math.random() * a.length)];
+                    classB();
+                    for(i = 0; i<n; i++)
+                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                    store(ipVal);
                 }
                 else if(dropDn === "Class C"){
-                    classC(n);
-                    ip = a[Math.floor(Math.random() * a.length)];
+                    classC();
+                    for(i = 0; i<n; i++)
+                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                    store(ipVal);
                 }
                 else if(dropDn === "Class D"){
-                    classD(n);
-                    ip = a[Math.floor(Math.random() * a.length)];
+                    classD();
+                    for(i = 0; i<n; i++)
+                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                    store(ipVal);
                 }
                 else{
-                    classE(n);
-                    ip = a[Math.floor(Math.random() * a.length)];
+                    classE();
+                    for(i = 0; i<n; i++)
+                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                    store(ipVal);
                 }
+                store(ipVal)
             }
             else{
                 //classless
             }
         }
-        else{
-            //ipv6
-        }
 
-        store(ip);
 }
 
 function store(ips){

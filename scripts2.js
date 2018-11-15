@@ -1,6 +1,9 @@
-var a = [];
+'use strict';
+
+var a;
 var ipVal = [];
 function classA() {
+    a = [];
     for (let ip of range('0.0.0.0', '0.0.0.60')) {
         a.push(ip);
     }
@@ -8,28 +11,32 @@ function classA() {
 }
 
 function classB() {
-    for (let ip of range('128.0.0.0', '128.0.0.20')) {
+    a = [];
+    for (let ip of range('128.0.0.0', '128.0.0.60')) {
         a.push(ip);
     }
     return a;
 }
 
 function classC() {
-    for (let ip of range('192.0.0.0', '192.0.0.20')) {
+    a = [];
+    for (let ip of range('192.0.0.0', '192.0.0.60')) {
         a.push(ip);
     }
     return a;
 }
 
 function classD() {
-    for (let ip of range('224.0.0.0', '224.0.0.20')) {
+    a = [];
+    for (let ip of range('224.0.0.0', '224.0.0.60')) {
         a.push(ip);
     }
     return a;
 }
 
 function classE() {
-    for (let ip of range('240.0.0.0', '240.0.0.20')) {
+    a = [];
+    for (let ip of range('240.0.0.0', '240.0.0.60')) {
         a.push(ip);
     }
     return a;
@@ -37,13 +44,20 @@ function classE() {
 
 function start(){
 
-    var ipType = document.getElementById("ip4").value;
-    if (ipType === undefined)
+    var ipType;
+    if(document.getElementById('ip4').checked) {
+        ipType = document.getElementById("ip4").value;
+    }
+    else
         ipType = document.getElementById("ip6").value;
 
-    var cls = document.getElementById("ip4type").value;
-    if (cls === undefined)
-        cls = document.getElementById("ip6type").value;
+    var cls;
+    if(document.getElementById('ip4type').checked) {
+        cls = document.getElementById("ip4type").value;
+    }
+    else
+        cls = document.getElementById("ip4type2").value;
+
 
     var n = document.getElementById("n").value;
 
@@ -55,37 +69,46 @@ function start(){
                 classA();
                 for(i = 0; i<n; i++)
                     ipVal.push(a[Math.floor(Math.random() * a.length)]);
-                store(ipVal,n);
             }
             else if(dropDn === "Class B"){
                 classB();
                 for(i = 0; i<n; i++)
                     ipVal.push(a[Math.floor(Math.random() * a.length)]);
-                store(ipVal,n);
             }
             else if(dropDn === "Class C"){
                 classC();
                 for(i = 0; i<n; i++)
                     ipVal.push(a[Math.floor(Math.random() * a.length)]);
-                store(ipVal,n);
             }
             else if(dropDn === "Class D"){
                 classD();
                 for(i = 0; i<n; i++)
                     ipVal.push(a[Math.floor(Math.random() * a.length)]);
-                store(ipVal,n);
             }
             else{
                 classE();
-                for(i = 0; i<n; i++)
-                    ipVal.push(a[Math.floor(Math.random() * a.length)]);
-                store(ipVal,n);
+                ipVal.push("Sorry this class of Ip's are reserved");
             }
+            store(ipVal,n);
         }
-        else{
+        else {
             //classless
         }
     }
+    else if (ipType === "IPV6"){
+        if(document.getElementById("Zero").value === true){
+            document.getElementById("output").innerText = abbreviate(generateIP6());
+        }
+        else
+            document.getElementById("output").innerText = generateIP6();
+        //ipv6
+    }
+}
+
+function generateIP6(){
+    //do generation of ip6 here
+    //generate and if not in DB
+    localStorage.setItem("","")
 }
 
 function store(ips, n){
@@ -106,16 +129,14 @@ function store(ips, n){
 
 //Zero compression
 function reduce(ip) {
-    let ip6 = require('ip6');
     return abbreviate(ip);
 }
 
-'use strict';
 
 /**
  *
  * This is sourced form https://www.npmjs.com/package/ip-range-generator
- * had some issues with npm that prevents me from using this
+ * had some issues with npm that prevented me from importing the packages
  *
  **/
 const ipv4 = /^(?:(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?:\.(?!$)|$)){4}$/;
@@ -140,6 +161,8 @@ function ip2hex(ip) {
 function assertIpv4(str, msg) {
     if (!ipv4.test(str)) { throw new Error(msg); }
 }
+
+
 
 /**
  * Generate all IPv4 that are included in the given range
@@ -219,4 +242,34 @@ let abbreviate = function (a) {
     //console.log(a);
     return a;
 };
+
+/***
+'use strict';
+
+const word = '[a-fA-F\\d:]';
+const b = `(?:(?<=\\s|^)(?=${word})|(?<=${word})(?=\\s|$))`;
+
+const v4 = '(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}';
+
+const v6seg = '[a-fA-F\\d]{1,4}';
+const v6 = `
+(
+(?:${v6seg}:){7}(?:${v6seg}|:)|                                // 1:2:3:4:5:6:7::  1:2:3:4:5:6:7:8
+(?:${v6seg}:){6}(?:${v4}|:${v6seg}|:)|                         // 1:2:3:4:5:6::    1:2:3:4:5:6::8   1:2:3:4:5:6::8  1:2:3:4:5:6::1.2.3.4
+(?:${v6seg}:){5}(?::${v4}|(:${v6seg}){1,2}|:)|                 // 1:2:3:4:5::      1:2:3:4:5::7:8   1:2:3:4:5::8    1:2:3:4:5::7:1.2.3.4
+(?:${v6seg}:){4}(?:(:${v6seg}){0,1}:${v4}|(:${v6seg}){1,3}|:)| // 1:2:3:4::        1:2:3:4::6:7:8   1:2:3:4::8      1:2:3:4::6:7:1.2.3.4
+(?:${v6seg}:){3}(?:(:${v6seg}){0,2}:${v4}|(:${v6seg}){1,4}|:)| // 1:2:3::          1:2:3::5:6:7:8   1:2:3::8        1:2:3::5:6:7:1.2.3.4
+(?:${v6seg}:){2}(?:(:${v6seg}){0,3}:${v4}|(:${v6seg}){1,5}|:)| // 1:2::            1:2::4:5:6:7:8   1:2::8          1:2::4:5:6:7:1.2.3.4
+(?:${v6seg}:){1}(?:(:${v6seg}){0,4}:${v4}|(:${v6seg}){1,6}|:)| // 1::              1::3:4:5:6:7:8   1::8            1::3:4:5:6:7:1.2.3.4
+(?::((?::${v6seg}){0,5}:${v4}|(?::${v6seg}){1,7}|:))           // ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8  ::8             ::1.2.3.4
+)(%[0-9a-zA-Z]{1,})?                                           // %eth0            %1
+`.replace(/\s*\/\/.*$/gm, '').replace(/\n/g, '').trim();
+
+const ip = opts => opts && opts.exact ?
+    new RegExp(`(?:^${v4}$)|(?:^${v6}$)`) :
+    new RegExp(`(?:${b}${v4}${b})|(?:${b}${v6}${b})`, 'g');
+
+ip.v4 = opts => opts && opts.exact ? new RegExp(`^${v4}$`) : new RegExp(`${b}${v4}${b}`, 'g');
+ip.v6 = opts => opts && opts.exact ? new RegExp(`^${v6}$`) : new RegExp(`${b}${v6}${b}`, 'g');
+ ***/
 

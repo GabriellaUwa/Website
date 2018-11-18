@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css"></head>
+    <script src="bundle.js"></script>
 </head>
 <body>
 <div id="mySidenav" class="sidenav">
@@ -46,12 +47,6 @@
 </div>
 
 <div>
-    <strong>This is only applicable if you chose IPV6</strong><br>
-    <input type="checkbox" name="Zero" value="Zero" id="Zero">Check if you want Zero Compression<br><br>
-
-</div>
-
-<div>
     <strong>This is only applicable if you chose Classful</strong>
     <select id="Classful">
         <option value="Class A">Class A</option>
@@ -61,6 +56,18 @@
         <option value="Class E">Class E</option>
     </select>
 </div>
+
+<div>
+    <strong>This is only applicable if you chose IPV6</strong><br>
+    <input type="checkbox" name="Zero" value="Zero" id="Zero">Check if you want Zero Compression<br><br>
+
+    <strong>Put in Ipv6 to manually test Zero Compression Functionality</strong>
+    <p style="color: black; font-size: small">You can copy and paste from outputs if they have Zero's</p>
+    <input name="ip" type="text" min="1" id="z">
+    <br><br>
+
+</div>
+
 
 <div>
     <strong>Here are your IP's:</strong>

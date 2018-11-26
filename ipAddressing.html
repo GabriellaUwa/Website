@@ -43,7 +43,7 @@
 <div>
     <strong>This is only applicable if you chose IPV4</strong><br>
     <input type="radio" name="ip4type" value="Classful" id="ip4type"> Classful<br>
-    <input type="radio" name="ip4type2" value="Classless" id="ip4type2"> Classless<br><br><br>
+    <input type="radio" name="ip4type" value="Classless" id="ip4type2"> Classless<br><br><br>
 </div>
 
 <div>
@@ -54,7 +54,13 @@
         <option value="Class C">Class C</option>
         <option value="Class D">Class D</option>
         <option value="Class E">Class E</option>
-    </select>
+    </select><br><br><br>
+</div>
+
+<div>
+    <strong>If you chose Classless, How many number of hosts do you need?</strong>
+         <input name="ip" type="number" min="1" id="less"><br><br><br>
+
 </div>
 
 <div>
@@ -64,7 +70,7 @@
     <strong>Put in Ipv6 to manually test Zero Compression Functionality</strong>
     <p style="color: black; font-size: small">You can copy and paste from outputs if they have Zero's</p>
     <input name="ip" type="text" min="1" id="z">
-    <br><br>
+    <br><br><br>
 
 </div>
 
@@ -73,7 +79,7 @@
     <strong>Here are your IP's:</strong>
     <p id="output" style="color: black;"></p>
 </div>
-<button type="button" onclick=start()>Get IP</button>
+<button type="button" onclick=start()>Get IP</button> <br><br><br><br><br><br><br><br><br>
 
 </body>
 </html>

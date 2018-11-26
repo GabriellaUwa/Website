@@ -132,14 +132,6 @@ function abb(n){
     }
     return str;
 }
-function generateIP6(n){
-
-   // if(document.getElementById("Zero").checked === true){
-       // document.getElementById("output").innerText = abb(randomIp6(n));
-   // }
-    //else
-    return NaN;
-}
 
 function store(ips, n){
     var i;
@@ -165,6 +157,35 @@ function store(ips, n){
 
     }
 }
+var randomIp6 = function(n) {
+
+    var qty = n;
+
+    var r = randomise("0123456789abcdef", 32 * qty, true);
+    var ip_block = [];
+    for(var i = 0; i < r.length; i++) {
+        var block_index = Math.floor(i / 4);
+        if(!Array.isArray(ip_block[block_index])) {
+            ip_block.push([]);
+        }
+        if(!ip_block[block_index].length == 0 || r[i] !== "0") {
+            ip_block[block_index].push(r[i]);
+        }
+    }
+    var ip = [];
+    for(var i = 0; i < ip_block.length; i++) {
+        var ip_index = Math.floor(i / 8);
+        if(!Array.isArray(ip[ip_index])) {
+            ip.push([]);
+        }
+        ip[ip_index].push(ip_block[i].join(""));
+    }
+    var ips = [];
+    for(var i = 0; i < ip.length; i++) {
+        ips.push(ip[i].join(":"));
+    }
+    return ips
+};
 
 /**
  *
@@ -349,34 +370,6 @@ Array.prototype.shuffle = function() {
         this[j] = temp;
     }
 };
-var randomIp6 = function(n) {
 
-    var qty = n;
-
-    var r = randomise("0123456789abcdef", 32 * qty, true);
-    var ip_block = [];
-    for(var i = 0; i < r.length; i++) {
-        var block_index = Math.floor(i / 4);
-        if(!Array.isArray(ip_block[block_index])) {
-            ip_block.push([]);
-        }
-        if(!ip_block[block_index].length == 0 || r[i] !== "0") {
-            ip_block[block_index].push(r[i]);
-        }
-    }
-    var ip = [];
-    for(var i = 0; i < ip_block.length; i++) {
-        var ip_index = Math.floor(i / 8);
-        if(!Array.isArray(ip[ip_index])) {
-            ip.push([]);
-        }
-        ip[ip_index].push(ip_block[i].join(""));
-    }
-    var ips = [];
-    for(var i = 0; i < ip.length; i++) {
-        ips.push(ip[i].join(":"));
-    }
-    return ips
-};
 //scp scripts2.js uwga8928@149.4.211.180:~/public_html/cs355
 

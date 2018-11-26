@@ -46,6 +46,24 @@ function classE() {
     return a;
 }
 
+function classless(){
+    a = [];
+    for (let ip of range('224.0.0.0', '224.0.0.60')) {
+        a.push(ip);
+    }
+    for (let ip of range('192.0.0.0', '192.0.0.60')) {
+        a.push(ip);
+    }
+    for (let ip of range('128.0.0.0', '128.0.0.60')) {
+        a.push(ip);
+    }
+    for (let ip of range('0.0.0.0', '0.0.0.60')) {
+        a.push(ip);
+    }
+
+    return a;
+}
+
 function start(){
 
     var ipType;
@@ -77,28 +95,28 @@ function start(){
                     classA();
                     ipVal = [];
                     for (i = 0; i < n; i++)
-                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                        ipVal.push((a[Math.floor(Math.random() * a.length)] + "/24"));
                     store(ipVal, n);
                 }
                 else if (dropDn === "Class B") {
                     classB();
                     ipVal = [];
                     for (i = 0; i < n; i++)
-                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                        ipVal.push((a[Math.floor(Math.random() * a.length)] + "/16"));
                     store(ipVal, n);
                 }
                 else if (dropDn === "Class C") {
                     classC();
                     ipVal = [];
                     for (i = 0; i < n; i++)
-                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                        ipVal.push((a[Math.floor(Math.random() * a.length)] + "/8"));
                     store(ipVal, n);
                 }
                 else if (dropDn === "Class D") {
                     classD();
                     ipVal = [];
                     for (i = 0; i < n; i++)
-                        ipVal.push(a[Math.floor(Math.random() * a.length)]);
+                        ipVal.push((a[Math.floor(Math.random() * a.length)] + "/0"));
                     store(ipVal, n);
                 }
                 else if (dropDn === "Class E") {
@@ -109,6 +127,13 @@ function start(){
                 }
             }
             else {
+                classless();
+                ipVal = [];
+                let val = 32 - Math.round(Math.log2(document.getElementById("less").value));
+
+                for (i = 0; i < n; i++)
+                    ipVal.push((a[Math.floor(Math.random() * a.length)] + "/" + val));
+                store(ipVal, n);
                 //classless
             }
         }
@@ -370,6 +395,3 @@ Array.prototype.shuffle = function() {
         this[j] = temp;
     }
 };
-
-//scp scripts2.js uwga8928@149.4.211.180:~/public_html/cs355
-
